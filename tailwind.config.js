@@ -7,9 +7,19 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['"Instrument Sans"', "sans-serif"], // Set Instrument Sans as the default sans-serif font
+      },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primary: "#633cff", // Deep Purple
+        primaryLight: "#beadff", // Lighter Purple
+        primaryLighter: "#efebff", // Lightest Purple
+        slateBlack: "#333333", // Dark Gray/Black
+        midGray: "#737373", // Medium Gray
+        lightGray: "#d9d9d9", // Light Gray
+        offWhite: "#fafafa", // Almost White
+        pureWhite: "#ffffff", // White
+        dangerRed: "#ff3939", // Alert Red
       },
     },
   },

@@ -1,15 +1,11 @@
 import localFont from "next/font/local";
 import "./globals.css";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const instrumentSans = localFont({
+  src: "./fonts/InstrumentSans-VariableFont2.ttf",
+  variable: "--font-instrument-sans", // Use a CSS variable for the font
+  weight: "100 900", // Range of supported weights
+  style: "normal", // Since this is a non-italic variant
 });
 
 export const metadata = {
@@ -20,11 +16,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <body className={`${instrumentSans.variable}`}>{children}</body>
     </html>
   );
 }
