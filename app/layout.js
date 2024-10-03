@@ -1,5 +1,9 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import "primereact/resources/themes/saga-blue/theme.css"; // Theme
+import "primereact/resources/primereact.min.css"; // Core CSS
+// import "primeicons/primeicons.css"; // Icons
+// import "primeflex/primeflex.css"; // Flex utilities
 
 const instrumentSans = localFont({
   src: "./fonts/InstrumentSans-VariableFont2.ttf",
