@@ -8,7 +8,9 @@ export default function Header() {
         width={35}
         height={35}
       />
-      <h1 className="lowercase font-bold">DevLinks</h1>
+      <h1 className="lowercase font-bold tracking-tight text-4xl text-slateBlack">
+        DevLinks
+      </h1>
     </div>
   );
 }

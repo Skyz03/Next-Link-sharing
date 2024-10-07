@@ -21,6 +21,30 @@ module.exports = {
         pureWhite: "#ffffff", // White
         dangerRed: "#ff3939", // Alert Red
       },
+      extend: {
+        typography: {
+          headingM: {
+            fontSize: "32px", // 32px font size
+            lineHeight: "150%", // 150% line height
+            fontWeight: "700", // Bold
+          },
+          headingS: {
+            fontSize: "16px", // 16px font size
+            lineHeight: "150%", // 150% line height
+            fontWeight: "700", // Bold
+          },
+          bodyM: {
+            fontSize: "16px", // 16px font size
+            lineHeight: "150%", // 150% line height
+            fontWeight: "400", // Regular (default)
+          },
+          bodyS: {
+            fontSize: "12px", // 12px font size
+            lineHeight: "150%", // 150% line height
+            fontWeight: "400", // Regular (default)
+          },
+        },
+      },
     },
   },
   plugins: [],
