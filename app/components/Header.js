@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image'
 
 export default function Header() {
   return (
@@ -8,9 +8,9 @@ export default function Header() {
         width={35}
         height={35}
       />
-      <h1 className="lowercase font-bold tracking-tight text-4xl text-slateBlack">
+      <h1 className="text-4xl font-bold lowercase tracking-tight text-slateBlack">
         DevLinks
       </h1>
     </div>
-  );
+  )
 }
