@@ -4,6 +4,7 @@ import 'primereact/resources/themes/saga-blue/theme.css' // Theme
 import 'primereact/resources/primereact.min.css' // Core CSS
 // import "primeicons/primeicons.css"; // Icons
 // import "primeflex/primeflex.css"; // Flex utilities
+import Header from './components/Header'
 
 const instrumentSans = localFont({
   src: './fonts/InstrumentSans-VariableFont2.ttf',
@@ -20,7 +21,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${instrumentSans.variable}`}>{children}</body>
+      <body
+        className={`${instrumentSans.variable} flex h-full w-full flex-col bg-pureWhite p-4`}
+      >
+        <Header />
+        {children}
+      </body>
     </html>
   )
 }
