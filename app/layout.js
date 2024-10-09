@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${instrumentSans.variable} flex h-full w-full flex-col bg-pureWhite p-4`}
       >
-        <Header />
+        {/* <Header /> */}
         {children}
       </body>
     </html>
