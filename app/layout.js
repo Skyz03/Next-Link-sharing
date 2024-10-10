@@ -1,9 +1,7 @@
+import 'primereact/resources/themes/saga-blue/theme.css' // PrimeReact Theme CSS
+import 'primereact/resources/primereact.min.css' // PrimeReact Core CSS
+import './globals.css' // Your global styles should be imported after PrimeReact
 import localFont from 'next/font/local'
-import './globals.css'
-import 'primereact/resources/themes/saga-blue/theme.css' // Theme
-import 'primereact/resources/primereact.min.css' // Core CSS
-// import "primeicons/primeicons.css"; // Icons
-// import "primeflex/primeflex.css"; // Flex utilities
 import Header from './components/Header'
 
 const instrumentSans = localFont({
