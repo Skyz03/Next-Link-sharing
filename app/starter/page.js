@@ -1,43 +1,40 @@
 'use client'
-import InsideHeader from '../components/headers/InsideHeader'
-import AddNewLink from './AddNewLink'
-import Image from 'next/image'
+
+import { useState } from 'react'
 import { Button } from 'primereact/button'
 import { Card } from 'primereact/card'
-import React, { useState } from 'react'
 import { Dropdown } from 'primereact/dropdown'
 import { InputText } from 'primereact/inputtext'
+import Image from 'next/image'
+import InsideHeader from '../components/headers/InsideHeader'
+import AddNewLink from './AddNewLink'
 
-const platformTemplate = (option) => {
-  if (option) {
-    return (
-      <div className="flex items-center gap-2">
-        <Image
-          src={`/assets/images/icon-${option.code.toLowerCase()}.svg`}
-          alt={option.name}
-          width={20}
-          height={20}
-          className="mr-2"
-        />
-        <span>{option.name}</span>
-      </div>
-    )
-  }
-  return null
-}
+const platformTemplate = (option) =>
+  option ? (
+    <div className="flex items-center gap-2">
+      <Image
+        src={`/assets/images/icon-${option.code.toLowerCase()}.svg`}
+        alt={option.name}
+        width={20}
+        height={20}
+        className="mr-2"
+      />
+      <span>{option.name}</span>
+    </div>
+  ) : null
+
+const platforms = [
+  { name: 'LinkedIn', code: 'linkedin' },
+  { name: 'Twitter', code: 'twitter' },
+  { name: 'Facebook', code: 'facebook' },
+  { name: 'GitHub', code: 'github' },
+  { name: 'StackOverflow', code: 'stackoverflow' },
+  { name: 'Instagram', code: 'instagram' },
+]
 
 export default function Starter() {
   const [selectedPlatform, setSelectedPlatform] = useState(null)
-  const [value, setValue] = useState('')
-
-  const platforms = [
-    { name: 'LinkedIn', code: 'linkedin' },
-    { name: 'Twitter', code: 'twitter' },
-    { name: 'Facebook', code: 'facebook' },
-    { name: 'GitHub', code: 'github' },
-    { name: 'StackOverflow', code: 'stackoverflow' },
-    { name: 'Instagram', code: 'instagram' },
-  ]
+  const [linkValue, setLinkValue] = useState('')
 
   return (
     <div className="text-slateBlack">
@@ -90,18 +87,7 @@ export default function Starter() {
             optionLabel="name"
             placeholder="Select a Platform"
             valueTemplate={platformTemplate(selectedPlatform)}
-            itemTemplate={(option) => (
-              <div className="flex items-center gap-2 text-black">
-                <Image
-                  src={`/assets/images/icon-${option.code.toLowerCase()}.svg`}
-                  alt={option.name}
-                  width={20}
-                  height={20}
-                  className="mr-2"
-                />
-                <span>{option.name}</span>
-              </div>
-            )}
+            itemTemplate={platformTemplate}
             className="w-full rounded-md border border-gray-300 bg-white p-2 text-black"
             panelClassName="text-black bg-white"
             showClear
@@ -135,8 +121,8 @@ export default function Starter() {
               className="mr-2"
             />
             <InputText
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
+              value={linkValue}
+              onChange={(e) => setLinkValue(e.target.value)}
               className="w-full border-none bg-transparent text-black focus:outline-none"
               placeholder="Enter your link"
             />

@@ -1,7 +1,7 @@
 import { InputText } from 'primereact/inputtext'
 import { Button } from 'primereact/button'
 import { Card } from 'primereact/card'
-import Image from 'next/image' // Use this to load images in Next.js
+import Image from 'next/image'
 
 export default function LoginForm() {
   return (
@@ -11,19 +11,18 @@ export default function LoginForm() {
       className="p-m-4 headingM mt-10 shadow-none"
     >
       <div className="flex flex-col gap-4">
-        {/* Email Input with Custom SVG Icon */}
         <div className="flex flex-col gap-2">
           <label htmlFor="email">Email address</label>
           <div className="flex items-center rounded-md border border-lightGray p-4">
             <Image
-              src="/assets/images/icon-email.svg" // Path to your email SVG
+              src="/assets/images/icon-email.svg"
               alt="Email Icon"
               width={20}
               height={20}
-              className="mr-2" // Optional: to give some margin
+              className="mr-2"
             />
             <InputText
-              className="flex-grow border-none focus:outline-none" // No extra border and auto width
+              className="flex-grow border-none focus:outline-none"
               id="email"
               type="email"
               placeholder="e.g. alex@email.com"
@@ -31,16 +30,15 @@ export default function LoginForm() {
           </div>
         </div>
 
-        {/* Password Input with Custom SVG Icon */}
         <div className="mt-4 flex flex-col gap-2">
           <label htmlFor="password">Password</label>
           <div className="flex items-center rounded-md border border-lightGray p-4">
             <Image
-              src="/assets/images/icon-password.svg" // Path to your password SVG
+              src="/assets/images/icon-password.svg"
               alt="Password Icon"
               width={20}
               height={20}
-              className="mr-2" // Optional: to give some margin
+              className="mr-2"
             />
             <InputText
               className="flex-grow border-none focus:outline-none"
@@ -51,16 +49,14 @@ export default function LoginForm() {
           </div>
         </div>
 
-        {/* Login Button */}
         <Button
           label="Login"
           icon="pi pi-sign-in"
           className="w-full rounded-md bg-primary p-4 text-white"
         />
 
-        {/* Additional Links */}
         <div className="p-mt-3 flex flex-col items-center gap-1">
-          <a>Don &apos t have an account?</a>
+          <a>Don&apos;t have an account?</a>
           <a className="text-primary">Create account</a>
         </div>
       </div>
