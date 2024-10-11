@@ -1,5 +1,5 @@
 import './globals.css' // Your global styles
-import 'primereact/resources/themes/lara-dark-green/theme.css' // Theme CSS
+import 'primereact/resources/themes/lara-dark-purple/theme.css' // Theme CSS
 import 'primereact/resources/primereact.min.css'
 import localFont from 'next/font/local'
 import { Button } from 'primereact/button'
@@ -26,8 +26,6 @@ export default function RootLayout({ children }) {
       >
         {/* <Header /> */}
         {children}
-
-        <Button className="p-button" label="Click" icon="pi pi-plus"></Button>
       </body>
     </html>
   )
