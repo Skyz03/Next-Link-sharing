@@ -9,6 +9,7 @@ export default function LinkCard({
   value,
   onChange,
   onRemove,
+  linkNumber, // Add linkNumber prop to display the link's number
 }) {
   return (
     <Card className="mt-8 rounded-lg bg-lightGray p-6 shadow-md">
@@ -20,7 +21,8 @@ export default function LinkCard({
             height={20}
             alt="Drag and Drop Icon"
           />
-          <h3 className="font-bold text-slateBlack">Link</h3>
+          <h3 className="font-bold text-slateBlack">Link #{linkNumber}</h3>{' '}
+          {/* Display the link number */}
         </div>
         <p
           className="cursor-pointer text-red-500 hover:underline"

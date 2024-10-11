@@ -1,15 +1,21 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import InsideHeader from '../components/headers/InsideHeader'
 import AddNewLink from './AddNewLink'
 import Image from 'next/image'
 import LinkCard from './LinkCard'
-import AddNewLinkButton from '../components/forms/AddNewLinkButton'
 import SaveButton from '../components/forms/SaveButton'
 
 export default function Starter() {
   const [links, setLinks] = useState([{ platform: null, value: '' }])
+
+  useEffect(() => {
+    const storedLinks = JSON.parse(localStorage.getItem('links')) || []
+    if (storedLinks.length > 0) {
+      setLinks(storedLinks)
+    }
+  }, [])
 
   const handleAddLink = () => {
     setLinks([...links, { platform: null, value: '' }])
@@ -33,13 +39,16 @@ export default function Starter() {
   }
 
   const handleSave = () => {
-    console.log('Links:', links)
+    localStorage.setItem('links', JSON.stringify(links))
+    console.log('Links saved:', links)
   }
 
   return (
     <div className="text-slateBlack">
       <InsideHeader />
-      <AddNewLink />
+
+      {/* Pass handleAddLink to AddNewLink */}
+      <AddNewLink onAddLink={handleAddLink} />
 
       <div className="rounded-md bg-lightGray p-7 text-center shadow-lg">
         <Image
@@ -57,6 +66,7 @@ export default function Starter() {
         </p>
       </div>
 
+      {/* Disable SaveButton if no links */}
       <SaveButton onClick={handleSave} disabled={links.length === 0} />
 
       {links.map((link, index) => (
@@ -69,11 +79,10 @@ export default function Starter() {
             onSelectPlatform={(platform) =>
               handlePlatformChange(platform, index)
             }
+            linkNumber={index + 1}
           />
         </div>
       ))}
-
-      <AddNewLinkButton onClick={handleAddLink} />
     </div>
   )
 }

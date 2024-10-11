@@ -1,6 +1,7 @@
 import { Button } from 'primereact/button'
 
-export default function AddNewLink() {
+export default function AddNewLink({ onAddLink }) {
+  // Accept onAddLink as a prop
   return (
     <div className="mt-4 bg-white p-4 text-slateBlack shadow">
       <h1 className="headingM text-2xl font-bold">Customize your links </h1>
@@ -12,6 +13,7 @@ export default function AddNewLink() {
         <Button
           label="+ Add new link"
           className="mx-0 w-full rounded-md border border-primary px-6 py-4 text-center font-bold text-primary"
+          onClick={onAddLink} // Use the onClick handler here
         />
       </div>
     </div>
