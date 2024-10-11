@@ -1,40 +1,32 @@
 'use client'
 
 import { useState } from 'react'
-import { Button } from 'primereact/button'
-import { Card } from 'primereact/card'
-import { Dropdown } from 'primereact/dropdown'
-import { InputText } from 'primereact/inputtext'
-import Image from 'next/image'
 import InsideHeader from '../components/headers/InsideHeader'
 import AddNewLink from './AddNewLink'
-
-const platformTemplate = (option) =>
-  option ? (
-    <div className="flex items-center gap-2">
-      <Image
-        src={`/assets/images/icon-${option.code.toLowerCase()}.svg`}
-        alt={option.name}
-        width={20}
-        height={20}
-        className="mr-2"
-      />
-      <span>{option.name}</span>
-    </div>
-  ) : null
-
-const platforms = [
-  { name: 'LinkedIn', code: 'linkedin' },
-  { name: 'Twitter', code: 'twitter' },
-  { name: 'Facebook', code: 'facebook' },
-  { name: 'GitHub', code: 'github' },
-  { name: 'StackOverflow', code: 'stackoverflow' },
-  { name: 'Instagram', code: 'instagram' },
-]
+import Image from 'next/image'
+import LinkCard from './LinkCard'
+import PlatformDropdown from '../components/forms/PlatformDropdown'
+import AddNewLinkButton from '../components/forms/AddNewLinkButton'
+import SaveButton from '../components/forms/SaveButton'
 
 export default function Starter() {
+  const [links, setLinks] = useState([{ platform: null, value: '' }])
   const [selectedPlatform, setSelectedPlatform] = useState(null)
-  const [linkValue, setLinkValue] = useState('')
+  const [value, setValue] = useState('')
+
+  const handleAddLink = () => {
+    setLinks([...links, { platform: null, value: '' }])
+  }
+
+  const handleRemoveLink = (index) => {
+    const updatedLinks = links.filter((_, i) => i !== index)
+    setLinks(updatedLinks)
+  }
+
+  const handleSave = () => {
+    // Add your save logic here
+    console.log('Links:', links)
+  }
 
   return (
     <div className="text-slateBlack">
@@ -57,78 +49,32 @@ export default function Starter() {
         </p>
       </div>
 
-      <Button
-        label="Save"
-        className="mt-6 w-full rounded-md bg-primaryLight py-3 font-semibold text-pureWhite"
-      />
+      <SaveButton onClick={handleSave} disabled={!links.length} />
 
-      <Card className="mt-8 rounded-lg bg-lightGray p-6 shadow-md">
-        <div className="mb-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Image
-              src="/assets/images/icon-drag-and-drop.svg"
-              width={20}
-              height={20}
-              alt="Drag and Drop Icon"
-            />
-            <h3 className="font-bold text-slateBlack">Link #1</h3>
-          </div>
-          <p className="cursor-pointer text-red-500 hover:underline">Remove</p>
-        </div>
-
-        <div className="mb-4">
-          <label className="mb-2 block text-sm font-semibold text-black">
-            Platform
-          </label>
-          <Dropdown
-            value={selectedPlatform}
-            onChange={(e) => setSelectedPlatform(e.value)}
-            options={platforms}
-            optionLabel="name"
-            placeholder="Select a Platform"
-            valueTemplate={platformTemplate(selectedPlatform)}
-            itemTemplate={platformTemplate}
-            className="w-full rounded-md border border-gray-300 bg-white p-2 text-black"
-            panelClassName="text-black bg-white"
-            showClear
-            dropdownIcon={
-              <Image
-                src="/assets/images/icon-chevron-down.svg"
-                alt="Chevron Down"
-                width={16}
-                height={16}
-              />
-            }
+      {links.map((link, index) => (
+        <div key={index} className="mt-4">
+          <PlatformDropdown
+            selectedPlatform={link.platform}
+            onSelect={(platform) => {
+              const updatedLinks = [...links]
+              updatedLinks[index].platform = platform
+              setLinks(updatedLinks)
+            }}
+          />
+          <LinkCard
+            platform={link.platform}
+            value={link.value}
+            onChange={(e) => {
+              const updatedLinks = [...links]
+              updatedLinks[index].value = e.target.value
+              setLinks(updatedLinks)
+            }}
+            onRemove={() => handleRemoveLink(index)}
           />
         </div>
+      ))}
 
-        <div>
-          <label className="mb-2 flex items-center gap-2 text-sm font-semibold text-black">
-            <Image
-              src="/assets/images/icon-link.svg"
-              width={20}
-              height={20}
-              alt="Link Icon"
-            />
-            Link
-          </label>
-          <div className="flex items-center rounded-md border border-gray-300 bg-white p-2">
-            <Image
-              src="/assets/images/icon-link.svg"
-              width={20}
-              height={20}
-              alt="Link Icon"
-              className="mr-2"
-            />
-            <InputText
-              value={linkValue}
-              onChange={(e) => setLinkValue(e.target.value)}
-              className="w-full border-none bg-transparent text-black focus:outline-none"
-              placeholder="Enter your link"
-            />
-          </div>
-        </div>
-      </Card>
+      <AddNewLinkButton onClick={handleAddLink} />
     </div>
   )
 }
