@@ -28,14 +28,13 @@ export default function PlatformDropdown({ selectedPlatform, onSelect }) {
   return (
     <Dropdown
       value={selectedPlatform}
-      onChange={(e) => onSelect(e.value)}
+      onChange={(e) => setSelectedPlatform(e.value)}
       options={platforms}
       optionLabel="name"
       placeholder="Select a Platform"
       valueTemplate={platformTemplate(selectedPlatform)}
       itemTemplate={platformTemplate}
-      className="w-full rounded-md border border-gray-300 bg-white p-2 text-black"
-      panelClassName="text-black bg-white"
+      className="w-full rounded-md border border-gray-300 bg-white text-black" // Ensure text color is black
       showClear
       dropdownIcon={
         <Image
@@ -45,6 +44,8 @@ export default function PlatformDropdown({ selectedPlatform, onSelect }) {
           height={16}
         />
       }
+      panelClassName="text-black bg-white"
+      style={{ color: 'black', borderColor: 'gray' }} // Set color and border color
     />
   )
 }

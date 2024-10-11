@@ -1,8 +1,15 @@
 import { Card } from 'primereact/card'
 import Image from 'next/image'
 import { InputText } from 'primereact/inputtext'
+import PlatformDropdown from '../components/forms/PlatformDropdown'
 
-export default function LinkCard({ platform, value, onChange, onRemove }) {
+export default function LinkCard({
+  selectedPlatform,
+  onSelectPlatform,
+  value,
+  onChange,
+  onRemove,
+}) {
   return (
     <Card className="mt-8 rounded-lg bg-lightGray p-6 shadow-md">
       <div className="mb-4 flex items-center justify-between">
@@ -21,6 +28,16 @@ export default function LinkCard({ platform, value, onChange, onRemove }) {
         >
           Remove
         </p>
+      </div>
+
+      <div className="mb-4">
+        <label className="mb-2 block text-sm font-semibold text-black">
+          Platform
+        </label>
+        <PlatformDropdown
+          selectedPlatform={selectedPlatform}
+          onSelect={onSelectPlatform}
+        />
       </div>
 
       <div>

@@ -5,14 +5,11 @@ import InsideHeader from '../components/headers/InsideHeader'
 import AddNewLink from './AddNewLink'
 import Image from 'next/image'
 import LinkCard from './LinkCard'
-import PlatformDropdown from '../components/forms/PlatformDropdown'
 import AddNewLinkButton from '../components/forms/AddNewLinkButton'
 import SaveButton from '../components/forms/SaveButton'
 
 export default function Starter() {
   const [links, setLinks] = useState([{ platform: null, value: '' }])
-  const [selectedPlatform, setSelectedPlatform] = useState(null)
-  const [value, setValue] = useState('')
 
   const handleAddLink = () => {
     setLinks([...links, { platform: null, value: '' }])
@@ -23,8 +20,19 @@ export default function Starter() {
     setLinks(updatedLinks)
   }
 
+  const handleLinkChange = (e, index) => {
+    const updatedLinks = [...links]
+    updatedLinks[index].value = e.target.value
+    setLinks(updatedLinks)
+  }
+
+  const handlePlatformChange = (platform, index) => {
+    const updatedLinks = [...links]
+    updatedLinks[index].platform = platform
+    setLinks(updatedLinks)
+  }
+
   const handleSave = () => {
-    // Add your save logic here
     console.log('Links:', links)
   }
 
@@ -49,27 +57,18 @@ export default function Starter() {
         </p>
       </div>
 
-      <SaveButton onClick={handleSave} disabled={!links.length} />
+      <SaveButton onClick={handleSave} disabled={links.length === 0} />
 
       {links.map((link, index) => (
         <div key={index} className="mt-4">
-          <PlatformDropdown
-            selectedPlatform={link.platform}
-            onSelect={(platform) => {
-              const updatedLinks = [...links]
-              updatedLinks[index].platform = platform
-              setLinks(updatedLinks)
-            }}
-          />
           <LinkCard
-            platform={link.platform}
+            selectedPlatform={link.platform}
             value={link.value}
-            onChange={(e) => {
-              const updatedLinks = [...links]
-              updatedLinks[index].value = e.target.value
-              setLinks(updatedLinks)
-            }}
+            onChange={(e) => handleLinkChange(e, index)}
             onRemove={() => handleRemoveLink(index)}
+            onSelectPlatform={(platform) =>
+              handlePlatformChange(platform, index)
+            }
           />
         </div>
       ))}

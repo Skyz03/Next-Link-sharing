@@ -45,3 +45,17 @@ body {
     text-wrap: balance;
   }
 }
+
+/* In your CSS file or in a <style> tag */
+.p-dropdown .p-dropdown-label {
+  color: black !important; /* Ensure the selected option's text is black */
+}
+
+.p-dropdown .p-dropdown-item {
+  color: black !important; /* Ensure dropdown items are black */
+}
+
+/* Optional: Change the placeholder color if needed */
+.p-dropdown .p-placeholder {
+  color: gray; /* Placeholder text color */
+}
