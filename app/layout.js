@@ -1,7 +1,9 @@
-import 'primereact/resources/themes/saga-blue/theme.css' // PrimeReact Theme CSS
-import 'primereact/resources/primereact.min.css' // PrimeReact Core CSS
-import './globals.css' // Your global styles should be imported after PrimeReact
+import './globals.css' // Your global styles
+import 'primereact/resources/themes/lara-dark-green/theme.css' // Theme CSS
+import 'primereact/resources/primereact.min.css'
 import localFont from 'next/font/local'
+import { Button } from 'primereact/button'
+
 import Header from './components/Header'
 
 const instrumentSans = localFont({
@@ -24,6 +26,8 @@ export default function RootLayout({ children }) {
       >
         {/* <Header /> */}
         {children}
+
+        <Button className="p-button" label="Click" icon="pi pi-plus"></Button>
       </body>
     </html>
   )

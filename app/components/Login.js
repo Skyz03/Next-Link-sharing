@@ -60,7 +60,7 @@ export default function LoginForm() {
 
         {/* Additional Links */}
         <div className="p-mt-3 flex flex-col items-center gap-1">
-          <a>Don't have an account?</a>
+          <a>Don &apos t have an account?</a>
           <a className="text-primary">Create account</a>
         </div>
       </div>
