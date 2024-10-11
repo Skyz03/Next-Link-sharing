@@ -4,7 +4,7 @@ import 'primereact/resources/primereact.min.css'
 import localFont from 'next/font/local'
 import { Button } from 'primereact/button'
 
-import Header from './components/Header'
+import Header from './components/headers/Header'
 
 const instrumentSans = localFont({
   src: './fonts/InstrumentSans-VariableFont2.ttf',

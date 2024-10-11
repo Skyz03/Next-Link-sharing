@@ -1,5 +1,5 @@
-import Header from '../components/Header'
-import NewAccount from '../components/NewAccount'
+import Header from '../components/headers/Header'
+import NewAccount from './NewAccount'
 
 export default function RegisterPage() {
   return (

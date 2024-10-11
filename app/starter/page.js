@@ -1,6 +1,6 @@
 'use client'
-import InsideHeader from '../components/InsideHeader'
-import AddNewLink from '../components/AddNewLink'
+import InsideHeader from '../components/headers/InsideHeader'
+import AddNewLink from './AddNewLink'
 import Image from 'next/image'
 import { Button } from 'primereact/button'
 import { Card } from 'primereact/card'
