@@ -3,12 +3,20 @@ import Image from 'next/image'
 
 export default function PlatformDropdown({ selectedPlatform, onSelect }) {
   const platforms = [
-    { name: 'LinkedIn', code: 'linkedin' },
-    { name: 'Twitter', code: 'twitter' },
-    { name: 'Facebook', code: 'facebook' },
     { name: 'GitHub', code: 'github' },
-    { name: 'StackOverflow', code: 'stackoverflow' },
-    { name: 'Instagram', code: 'instagram' },
+    { name: 'Frontend Mentor', code: 'frontend-mentor' },
+    { name: 'Twitter', code: 'twitter' },
+    { name: 'LinkedIn', code: 'linkedin' },
+    { name: 'Youtube', code: 'youtube' },
+    { name: 'Facebook', code: 'facebook' },
+    { name: 'Twitch', code: 'twitch' },
+    { name: 'Dev.to', code: 'devto' },
+    { name: 'Codewars', code: 'codewars' },
+    { name: 'Codepen', code: 'codepen' },
+    { name: 'freeCodeCamp', code: 'freecodecamp' },
+    { name: 'GitLab', code: 'gitlab' },
+    { name: 'Hashnode', code: 'hashnode' },
+    { name: 'StackOverflow', code: 'stack-overflow' },
   ]
 
   const platformTemplate = (option) =>
