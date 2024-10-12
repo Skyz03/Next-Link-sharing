@@ -30,7 +30,6 @@ export default function PlatformDropdown({ selectedPlatform, onSelect }) {
           className="mr-2"
         />
         <span className="text-black">{option.name}</span>{' '}
-        {/* Ensure text is black */}
       </div>
     ) : null
 

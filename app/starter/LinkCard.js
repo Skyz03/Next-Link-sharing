@@ -9,20 +9,25 @@ export default function LinkCard({
   value,
   onChange,
   onRemove,
-  linkNumber, // Add linkNumber prop to display the link's number
+  linkNumber,
+  dragHandleProps, // Pass dragHandleProps to the card
 }) {
   return (
     <Card className="mt-8 rounded-lg bg-lightGray p-6 shadow-md">
       <div className="mb-4 flex items-center justify-between">
-        <div className="flex items-center gap-2">
+        <div
+          className="flex items-center gap-2"
+          {...dragHandleProps}
+          style={{ cursor: 'grab', userSelect: 'none' }}
+        >
+          {/* Drag icon now uses dragHandleProps */}
           <Image
             src="/assets/images/icon-drag-and-drop.svg"
             width={20}
             height={20}
             alt="Drag and Drop Icon"
           />
-          <h3 className="font-bold text-slateBlack">Link #{linkNumber}</h3>{' '}
-          {/* Display the link number */}
+          <h3 className="font-bold text-slateBlack">Link #{linkNumber}</h3>
         </div>
         <p
           className="cursor-pointer text-red-500 hover:underline"
