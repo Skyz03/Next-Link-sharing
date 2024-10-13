@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${instrumentSans.variable} flex h-full w-full flex-col bg-pureWhite p-4`}
+        className={`${instrumentSans.variable} flex h-full w-full flex-col bg-offWhite`}
       >
         {/* <Header /> */}
         {children}

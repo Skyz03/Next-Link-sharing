@@ -3,7 +3,7 @@ import { Button } from 'primereact/button'
 export default function AddNewLink({ onAddLink }) {
   // Accept onAddLink as a prop
   return (
-    <div className="mt-4 bg-white p-4 text-slateBlack shadow">
+    <div className="p-4 text-slateBlack">
       <h1 className="headingM text-2xl font-bold">Customize your links </h1>
       <p className="mt-2">
         Add/edit/remove links below and then share all your profiles with the

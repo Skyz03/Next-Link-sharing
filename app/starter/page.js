@@ -69,75 +69,79 @@ export default function Starter() {
   const hasValidLink = links.some((link) => link.platform && link.value)
 
   return (
-    <div className="text-slateBlack">
+    <>
       <InsideHeader />
+      <div className="p-4 text-slateBlack">
+        {/* Add new link button */}
+        <div className="rounded-md shadow-md">
+          <AddNewLink onAddLink={handleAddLink} />
 
-      {/* Add new link button */}
-      <AddNewLink onAddLink={handleAddLink} />
-
-      {/* Conditionally show intro section if there are no valid links */}
-      {!hasValidLink && (
-        <div className="rounded-md bg-lightGray p-7 text-center shadow-lg">
-          <Image
-            src="/assets/images/illustration-empty.svg"
-            width={120}
-            height={120}
-            alt="Illustration indicating getting started"
-            className="mx-auto w-full"
-          />
-          <h1 className="mt-4 text-xl font-bold">Let&apos;s get you started</h1>
-          <p className="mt-2 text-midGray">
-            Use the “Add new link” button to get started. Once you have more
-            than one link, you can reorder and edit them. We&apos;re here to
-            help you share your profiles with everyone!
-          </p>
-        </div>
-      )}
-
-      {/* DragDropContext for handling drag and drop */}
-      <DragDropContext onDragEnd={handleDragEnd}>
-        <Droppable droppableId="links">
-          {(provided) => (
-            <div {...provided.droppableProps} ref={provided.innerRef}>
-              {links.map((link, index) => (
-                <Draggable
-                  key={index}
-                  draggableId={`link-${index}`}
-                  index={index}
-                >
-                  {(provided) => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      className="mt-4"
-                    >
-                      <LinkCard
-                        selectedPlatform={link.platform}
-                        value={link.value}
-                        onChange={(e) => handleLinkChange(e, index)}
-                        onRemove={() => handleRemoveLink(index)}
-                        onSelectPlatform={(platform) =>
-                          handlePlatformChange(platform, index)
-                        }
-                        linkNumber={index + 1}
-                        dragHandleProps={provided.dragHandleProps} // Pass dragHandleProps to LinkCard
-                      />
-                    </div>
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
+          {/* Conditionally show intro section if there are no valid links */}
+          {!hasValidLink && (
+            <div className="m-4 mb-8 rounded-md bg-offWhite bg-red-400 p-4 text-center shadow-lg">
+              <Image
+                src="/assets/images/illustration-empty.svg"
+                width={120}
+                height={120}
+                alt="Illustration indicating getting started"
+                className="mx-auto w-full"
+              />
+              <h1 className="mt-4 text-xl font-bold">
+                Let&apos;s get you started
+              </h1>
+              <p className="mt-2 text-midGray">
+                Use the “Add new link” button to get started. Once you have more
+                than one link, you can reorder and edit them. We&apos;re here to
+                help you share your profiles with everyone!
+              </p>
             </div>
           )}
-        </Droppable>
-      </DragDropContext>
-
-      {/* Show SaveButton only if there is at least one valid link */}
-      {hasValidLink && (
-        <div className="mt-4">
-          <SaveButton onClick={handleSave} disabled={links.length === 0} />
         </div>
-      )}
-    </div>
+        {/* DragDropContext for handling drag and drop */}
+        <DragDropContext onDragEnd={handleDragEnd}>
+          <Droppable droppableId="links">
+            {(provided) => (
+              <div {...provided.droppableProps} ref={provided.innerRef}>
+                {links.map((link, index) => (
+                  <Draggable
+                    key={index}
+                    draggableId={`link-${index}`}
+                    index={index}
+                  >
+                    {(provided) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        className="mt-4"
+                      >
+                        <LinkCard
+                          selectedPlatform={link.platform}
+                          value={link.value}
+                          onChange={(e) => handleLinkChange(e, index)}
+                          onRemove={() => handleRemoveLink(index)}
+                          onSelectPlatform={(platform) =>
+                            handlePlatformChange(platform, index)
+                          }
+                          linkNumber={index + 1}
+                          dragHandleProps={provided.dragHandleProps} // Pass dragHandleProps to LinkCard
+                        />
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+
+        {/* Show SaveButton only if there is at least one valid link */}
+        {hasValidLink && (
+          <div className="mt-4">
+            <SaveButton onClick={handleSave} disabled={links.length === 0} />
+          </div>
+        )}
+      </div>
+    </>
   )
 }

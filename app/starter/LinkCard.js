@@ -13,7 +13,7 @@ export default function LinkCard({
   dragHandleProps, // Pass dragHandleProps to the card
 }) {
   return (
-    <Card className="mt-8 rounded-lg bg-lightGray p-6 shadow-md">
+    <Card className="mt-8 rounded-lg bg-offWhite p-6 shadow-md">
       <div className="mb-4 flex items-center justify-between">
         <div
           className="flex items-center gap-2"

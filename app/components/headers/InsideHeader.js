@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export default function InsideHeader() {
   return (
-    <div className="flex flex-row items-center justify-between gap-6">
+    <div className="flex flex-row items-center justify-between gap-6 bg-pureWhite p-4">
       <Image
         src="assets/images/logo-devlinks-small.svg"
         width={32}
