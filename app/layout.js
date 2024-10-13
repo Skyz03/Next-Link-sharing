@@ -1,5 +1,5 @@
 import './globals.css' // Your global styles
-import 'primereact/resources/themes/lara-dark-purple/theme.css' // Theme CSS
+import 'primereact/resources/themes/md-light-deeppurple/theme.css' // Theme CSS
 import 'primereact/resources/primereact.min.css'
 import localFont from 'next/font/local'
 import { Button } from 'primereact/button'
