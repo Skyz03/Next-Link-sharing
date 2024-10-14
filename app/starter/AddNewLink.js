@@ -12,7 +12,7 @@ export default function AddNewLink({ onAddLink }) {
       <div className="mt-6">
         <Button
           label="+ Add new link"
-          className="mx-0 w-full rounded-md border border-primary px-6 py-4 text-center font-bold text-primary"
+          className="mx-0 w-full rounded-md border border-primary px-6 py-2 text-center font-bold text-primary"
           onClick={onAddLink} // Use the onClick handler here
         />
       </div>

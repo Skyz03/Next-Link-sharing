@@ -73,23 +73,23 @@ export default function Starter() {
       <InsideHeader />
       <div className="p-4 text-slateBlack">
         {/* Add new link button */}
-        <div className="rounded-md shadow-md">
+        <div className="bg-pureWhite py-4 shadow-sm">
           <AddNewLink onAddLink={handleAddLink} />
 
           {/* Conditionally show intro section if there are no valid links */}
           {!hasValidLink && (
-            <div className="m-4 mb-8 rounded-md bg-offWhite bg-red-400 p-4 text-center shadow-lg">
+            <div className="mx-4 rounded-lg bg-offWhite p-4 text-justify">
               <Image
                 src="/assets/images/illustration-empty.svg"
-                width={120}
-                height={120}
+                width={124}
+                height={70}
                 alt="Illustration indicating getting started"
-                className="mx-auto w-full"
+                className="mx-auto"
               />
-              <h1 className="mt-4 text-xl font-bold">
+              <h1 className="mt-4 text-center text-2xl font-bold">
                 Let&apos;s get you started
               </h1>
-              <p className="mt-2 text-midGray">
+              <p className="font-bodyM mt-2 text-midGray">
                 Use the “Add new link” button to get started. Once you have more
                 than one link, you can reorder and edit them. We&apos;re here to
                 help you share your profiles with everyone!
