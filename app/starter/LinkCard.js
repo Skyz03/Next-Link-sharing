@@ -13,7 +13,7 @@ export default function LinkCard({
   dragHandleProps, // Pass dragHandleProps to the card
 }) {
   return (
-    <Card className="mt-8 rounded-lg bg-offWhite p-6 shadow-md">
+    <Card className="m-4 rounded-lg bg-offWhite shadow-sm">
       <div className="mb-4 flex items-center justify-between">
         <div
           className="flex items-center gap-2"
@@ -23,14 +23,14 @@ export default function LinkCard({
           {/* Drag icon now uses dragHandleProps */}
           <Image
             src="/assets/images/icon-drag-and-drop.svg"
-            width={20}
-            height={20}
+            width={12}
+            height={6}
             alt="Drag and Drop Icon"
           />
           <h3 className="font-bold text-slateBlack">Link #{linkNumber}</h3>
         </div>
         <p
-          className="cursor-pointer text-red-500 hover:underline"
+          className="cursor-pointer text-midGray hover:underline"
           onClick={onRemove}
         >
           Remove
@@ -68,8 +68,9 @@ export default function LinkCard({
           <InputText
             value={value}
             onChange={onChange}
-            className="w-full border-none bg-transparent text-black focus:outline-none"
+            className="w-full text-black focus:shadow-none"
             placeholder="Enter your link"
+            variant="outlined"
           />
         </div>
       </div>

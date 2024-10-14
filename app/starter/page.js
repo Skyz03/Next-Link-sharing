@@ -96,44 +96,45 @@ export default function Starter() {
               </p>
             </div>
           )}
+
+          <DragDropContext onDragEnd={handleDragEnd}>
+            <Droppable droppableId="links">
+              {(provided) => (
+                <div {...provided.droppableProps} ref={provided.innerRef}>
+                  {links.map((link, index) => (
+                    <Draggable
+                      key={index}
+                      draggableId={`link-${index}`}
+                      index={index}
+                    >
+                      {(provided) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          className="mt-4"
+                        >
+                          <LinkCard
+                            selectedPlatform={link.platform}
+                            value={link.value}
+                            onChange={(e) => handleLinkChange(e, index)}
+                            onRemove={() => handleRemoveLink(index)}
+                            onSelectPlatform={(platform) =>
+                              handlePlatformChange(platform, index)
+                            }
+                            linkNumber={index + 1}
+                            dragHandleProps={provided.dragHandleProps} // Pass dragHandleProps to LinkCard
+                          />
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
         </div>
         {/* DragDropContext for handling drag and drop */}
-        <DragDropContext onDragEnd={handleDragEnd}>
-          <Droppable droppableId="links">
-            {(provided) => (
-              <div {...provided.droppableProps} ref={provided.innerRef}>
-                {links.map((link, index) => (
-                  <Draggable
-                    key={index}
-                    draggableId={`link-${index}`}
-                    index={index}
-                  >
-                    {(provided) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        className="mt-4"
-                      >
-                        <LinkCard
-                          selectedPlatform={link.platform}
-                          value={link.value}
-                          onChange={(e) => handleLinkChange(e, index)}
-                          onRemove={() => handleRemoveLink(index)}
-                          onSelectPlatform={(platform) =>
-                            handlePlatformChange(platform, index)
-                          }
-                          linkNumber={index + 1}
-                          dragHandleProps={provided.dragHandleProps} // Pass dragHandleProps to LinkCard
-                        />
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
 
         {/* Show SaveButton only if there is at least one valid link */}
         {hasValidLink && (
