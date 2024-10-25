@@ -51,23 +51,21 @@ export default function ProfileDetails() {
   }
 
   return (
-    <div>
-      {/* Same InsideHeader for consistency across pages */}
+    <div className="p-4 text-slateBlack">
+      {/* InsideHeader for page consistency */}
       <InsideHeader />
 
-      {/* Profile Details Page Content */}
+      {/* Page title and description */}
       <div className="mt-4 bg-white p-4 text-slateBlack shadow">
-        <h1 className="headingM text-2xl font-bold">Profile Details</h1>
+        <h1 className="text-2xl font-bold">Profile Details</h1>
         <p className="mt-2">
           Add your details to create a personal touch to your profile.
         </p>
       </div>
 
-      {/* Profile Picture Card */}
-      <div className="mt-6 rounded-md bg-lightGray p-6 shadow-md">
+      {/* Profile Picture Section */}
+      <div className="mt-6 rounded-md bg-lightGray p-4 shadow-md text-slateBlack">
         <h2 className="text-xl font-bold">Profile Picture</h2>
-
-        {/* Profile Image Input */}
         <div className="relative mt-4 text-primary">
           <label
             htmlFor="profileImage"
@@ -92,7 +90,7 @@ export default function ProfileDetails() {
               </div>
             )}
 
-            {/* Overlay for change image functionality */}
+            {/* Overlay to change the image */}
             {profileImage && (
               <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
                 <div className="flex flex-col items-center text-center text-white">
@@ -101,7 +99,7 @@ export default function ProfileDetails() {
                     alt="Upload Icon"
                     width={35}
                     height={35}
-                    className="text-white" // Ensures the icon is white
+                    className="text-white"
                   />
                   <p className="text-sm font-bold">Change Image</p>
                 </div>
@@ -123,8 +121,8 @@ export default function ProfileDetails() {
         </p>
       </div>
 
-      {/* Personal Information Card */}
-      <div className="mt-6 rounded-md bg-lightGray p-6 shadow-md">
+      {/* Personal Information Section */}
+      <div className="mt-6 rounded-md bg-lightGray p-4 shadow-md text-slateBlack">
         <div className="mt-4">
           <label className="block text-sm font-semibold text-slateBlack">
             First Name*
@@ -166,10 +164,10 @@ export default function ProfileDetails() {
       </div>
 
       {/* Save Button */}
-      <div className="mt-6">
+      <div className="mt-6 p-4">
         <Button
           label="Save"
-          className="w-full bg-primary p-4"
+          className="w-full bg-primary p-4 text-white"
           onClick={handleSave}
         />
       </div>
