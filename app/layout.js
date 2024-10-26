@@ -1,16 +1,13 @@
-import './globals.css' // Your global styles
-import 'primereact/resources/themes/md-light-deeppurple/theme.css' // Theme CSS
+import './globals.css'
+import 'primereact/resources/themes/md-light-deeppurple/theme.css'
 import 'primereact/resources/primereact.min.css'
 import localFont from 'next/font/local'
-import { Button } from 'primereact/button'
-
-import Header from './components/headers/Header'
 
 const instrumentSans = localFont({
   src: './fonts/InstrumentSans-VariableFont2.ttf',
-  variable: '--font-instrument-sans', // Use a CSS variable for the font
-  weight: '100 900', // Range of supported weights
-  style: 'normal', // Since this is a non-italic variant
+  variable: '--font-instrument-sans',
+  weight: '100 900',
+  style: 'normal',
 })
 
 export const metadata = {

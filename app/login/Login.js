@@ -8,7 +8,7 @@ export default function LoginForm() {
     <Card
       title="Login"
       subTitle="Add your details below to get back into the app"
-      className="p-m-4 headingM mt-10 shadow-none"
+      className="headingM shadow-none"
     >
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">

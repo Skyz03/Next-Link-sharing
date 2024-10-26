@@ -6,8 +6,8 @@
   font-family: 'Instrument Sans';
   src: url('/public/assets/fonts/InstrumentSans-Italic-VariableFont1.ttf')
     format('truetype');
-  font-weight: 100 900; /* Supports all weights from thin to bold */
-  font-stretch: 75% 125%; /* Variable width axis */
+  font-weight: 100 900;
+  font-stretch: 75% 125%;
   font-style: normal;
 }
 
@@ -20,8 +20,7 @@
   font-style: italic;
 }
 
-/* Ensure you're linking to the correct font files and formats */
-
+/* Root color variables for light and dark themes */
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -35,8 +34,8 @@
 }
 
 body {
+  background-color: var(--background);
   color: var(--foreground);
-  background: var(--background);
   font-family: 'Instrument Sans', sans-serif !important;
 }
 
@@ -46,16 +45,35 @@ body {
   }
 }
 
-/* In your CSS file or in a <style> tag */
-.p-dropdown .p-dropdown-label {
-  color: black !important; /* Ensure the selected option's text is black */
+.p-component,
+.p-button,
+.p-inputtext,
+.p-dropdown,
+.p-card,
+.p-panel,
+.p-dialog,
+.p-tooltip,
+.p-datatable,
+.p-inputgroup,
+.p-tabview,
+.p-menu,
+.p-menuitem,
+.p-overlaypanel,
+.p-calendar,
+.p-checkbox,
+.p-radiobutton,
+.p-toast,
+.p-tree,
+.p-treeselect,
+.p-sidebar {
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-.p-dropdown .p-dropdown-item {
-  color: black !important; /* Ensure dropdown items are black */
-}
-
-/* Optional: Change the placeholder color if needed */
-.p-dropdown .p-placeholder {
-  color: gray; /* Placeholder text color */
+.p-card-body,
+.p-panel-content,
+.p-dialog-content,
+.p-datatable-tbody > tr > td {
+  padding: 0 !important;
+  margin: 0 !important;
 }
