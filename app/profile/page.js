@@ -51,126 +51,129 @@ export default function ProfileDetails() {
   }
 
   return (
-    <div className="p-4 text-slateBlack">
-      {/* InsideHeader for page consistency */}
+    <>
       <InsideHeader />
 
-      {/* Page title and description */}
-      <div className="mt-4 bg-white p-4 text-slateBlack shadow">
-        <h1 className="text-2xl font-bold">Profile Details</h1>
-        <p className="mt-2">
-          Add your details to create a personal touch to your profile.
-        </p>
-      </div>
+      <div className="p-4 text-slateBlack">
+        {/* Page title and description */}
+        <div className="mt-4 bg-white p-4 text-slateBlack shadow">
+          <h1 className="text-2xl font-bold">Profile Details</h1>
+          <p className="mt-2">
+            Add your details to create a personal touch to your profile.
+          </p>
+        </div>
 
-      {/* Profile Picture Section */}
-      <div className="mt-6 rounded-md bg-lightGray p-4 shadow-md text-slateBlack">
-        <h2 className="text-xl font-bold">Profile Picture</h2>
-        <div className="relative mt-4 text-primary">
-          <label
-            htmlFor="profileImage"
-            className="relative flex h-32 w-32 cursor-pointer items-center justify-center overflow-hidden rounded-lg border border-gray-300 bg-primaryLighter"
-          >
-            {/* Show uploaded image or placeholder */}
-            {profileImage ? (
-              <img
-                src={profileImage}
-                alt="Profile"
-                className="h-full w-full object-cover"
-              />
-            ) : (
-              <div className="flex flex-col items-center text-center">
-                <Image
-                  src="/assets/images/icon-upload-image.svg"
-                  alt="Upload Icon"
-                  width={35}
-                  height={35}
+        {/* Profile Picture Section */}
+        <div className="mt-6 rounded-md bg-lightGray p-4 text-slateBlack shadow-md">
+          <h2 className="text-xl font-bold">Profile Picture</h2>
+          <div className="relative mt-4 text-primary">
+            <label
+              htmlFor="profileImage"
+              className="relative flex h-32 w-32 cursor-pointer items-center justify-center overflow-hidden rounded-lg border border-gray-300 bg-primaryLighter"
+            >
+              {/* Show uploaded image or placeholder */}
+              {profileImage ? (
+                <img
+                  src={profileImage}
+                  alt="Profile"
+                  className="h-full w-full object-cover"
                 />
-                <p className="text-sm font-bold text-primary">+ Upload Image</p>
-              </div>
-            )}
-
-            {/* Overlay to change the image */}
-            {profileImage && (
-              <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                <div className="flex flex-col items-center text-center text-white">
+              ) : (
+                <div className="flex flex-col items-center text-center">
                   <Image
                     src="/assets/images/icon-upload-image.svg"
                     alt="Upload Icon"
                     width={35}
                     height={35}
-                    className="text-white"
                   />
-                  <p className="text-sm font-bold">Change Image</p>
+                  <p className="text-sm font-bold text-primary">
+                    + Upload Image
+                  </p>
                 </div>
-              </div>
-            )}
-          </label>
+              )}
 
-          <input
-            type="file"
-            id="profileImage"
-            className="hidden"
-            accept="image/png, image/jpeg"
-            onChange={handleImageUpload}
-          />
+              {/* Overlay to change the image */}
+              {profileImage && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                  <div className="flex flex-col items-center text-center text-white">
+                    <Image
+                      src="/assets/images/icon-upload-image.svg"
+                      alt="Upload Icon"
+                      width={35}
+                      height={35}
+                      className="text-white"
+                    />
+                    <p className="text-sm font-bold">Change Image</p>
+                  </div>
+                </div>
+              )}
+            </label>
+
+            <input
+              type="file"
+              id="profileImage"
+              className="hidden"
+              accept="image/png, image/jpeg"
+              onChange={handleImageUpload}
+            />
+          </div>
+
+          <p className="mt-2 text-sm text-midGray">
+            Image must be below 1024x1024px. Use PNG or JPG format.
+          </p>
         </div>
 
-        <p className="mt-2 text-sm text-midGray">
-          Image must be below 1024x1024px. Use PNG or JPG format.
-        </p>
+        {/* Personal Information Section */}
+        <div className="mt-6 rounded-md bg-lightGray p-4 text-slateBlack shadow-md">
+          <div className="mt-4">
+            <label className="block text-sm font-semibold text-slateBlack">
+              First Name*
+            </label>
+            <input
+              type="text"
+              className="mt-2 w-full rounded-md border border-gray-300 p-4 text-slateBlack"
+              placeholder="Ben"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+          </div>
+
+          <div className="mt-4">
+            <label className="block text-sm font-semibold text-slateBlack">
+              Last Name*
+            </label>
+            <input
+              type="text"
+              className="mt-2 w-full rounded-md border border-gray-300 p-4 text-slateBlack"
+              placeholder="Wright"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            />
+          </div>
+
+          <div className="mt-4">
+            <label className="block text-sm font-semibold text-slateBlack">
+              Email
+            </label>
+            <input
+              type="email"
+              className="mt-2 w-full rounded-md border border-gray-300 p-4 text-slateBlack"
+              placeholder="ben@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+        </div>
+
+        {/* Save Button */}
+        <div className="mt-6 p-4">
+          <Button
+            label="Save"
+            className="w-full bg-primary p-4 text-white"
+            onClick={handleSave}
+          />
+        </div>
       </div>
-
-      {/* Personal Information Section */}
-      <div className="mt-6 rounded-md bg-lightGray p-4 shadow-md text-slateBlack">
-        <div className="mt-4">
-          <label className="block text-sm font-semibold text-slateBlack">
-            First Name*
-          </label>
-          <input
-            type="text"
-            className="mt-2 w-full rounded-md border border-gray-300 p-4 text-slateBlack"
-            placeholder="Ben"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-        </div>
-
-        <div className="mt-4">
-          <label className="block text-sm font-semibold text-slateBlack">
-            Last Name*
-          </label>
-          <input
-            type="text"
-            className="mt-2 w-full rounded-md border border-gray-300 p-4 text-slateBlack"
-            placeholder="Wright"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-          />
-        </div>
-
-        <div className="mt-4">
-          <label className="block text-sm font-semibold text-slateBlack">
-            Email
-          </label>
-          <input
-            type="email"
-            className="mt-2 w-full rounded-md border border-gray-300 p-4 text-slateBlack"
-            placeholder="ben@example.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-      </div>
-
-      {/* Save Button */}
-      <div className="mt-6 p-4">
-        <Button
-          label="Save"
-          className="w-full bg-primary p-4 text-white"
-          onClick={handleSave}
-        />
-      </div>
-    </div>
+    </>
   )
 }

@@ -78,7 +78,7 @@ export default function Starter() {
 
           {/* Conditionally show intro section if there are no valid links */}
           {!hasValidLink && (
-            <div className="mx-4 rounded-lg bg-offWhite p-4 text-justify">
+            <div className="mx-4 rounded-xl bg-offWhite p-4 text-justify">
               <Image
                 src="/assets/images/illustration-empty.svg"
                 width={124}
@@ -89,7 +89,7 @@ export default function Starter() {
               <h1 className="mt-4 text-center text-2xl font-bold">
                 Let&apos;s get you started
               </h1>
-              <p className="font-bodyM mt-2 text-midGray">
+              <p className="font-bodyM mt-2 text-center tracking-wide text-midGray">
                 Use the “Add new link” button to get started. Once you have more
                 than one link, you can reorder and edit them. We&apos;re here to
                 help you share your profiles with everyone!
