@@ -8,6 +8,7 @@ export default function Header() {
         src="./assets/images/logo-devlinks-small.svg"
         width={40}
         height={40}
+        alt="logo dev"
       />
       <h1 className="text-4xl font-bold lowercase tracking-tight text-slateBlack">
         DevLinks
