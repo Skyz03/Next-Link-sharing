@@ -66,8 +66,8 @@ body {
 .p-tree,
 .p-treeselect,
 .p-sidebar {
-  margin: 0 !important;
-  padding: 0 !important;
+  margin: 0;
+  padding: 0;
 }
 
 .p-card-body,
@@ -76,4 +76,9 @@ body {
 .p-datatable-tbody > tr > td {
   padding: 0 !important;
   margin: 0 !important;
+}
+
+/* globals.css */
+.btn-primary {
+  @apply w-full rounded-md bg-primary p-4 text-white;
 }

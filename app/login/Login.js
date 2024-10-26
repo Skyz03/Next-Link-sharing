@@ -22,7 +22,7 @@ export default function LoginForm() {
               className="mr-2"
             />
             <InputText
-              className="flex-grow border-none focus:outline-none"
+              className="flex-grow border-none focus:shadow-none"
               id="email"
               type="email"
               placeholder="e.g. alex@email.com"
@@ -41,7 +41,7 @@ export default function LoginForm() {
               className="mr-2"
             />
             <InputText
-              className="flex-grow border-none focus:outline-none"
+              className="flex-grow border-none focus:shadow-none"
               id="password"
               type="password"
               placeholder="Enter your password"
@@ -49,13 +49,9 @@ export default function LoginForm() {
           </div>
         </div>
 
-        <Button
-          label="Login"
-          icon="pi pi-sign-in"
-          className="w-full rounded-md bg-primary p-4 text-white"
-        />
+        <Button label="Login" className="btn-primary" />
 
-        <div className="p-mt-3 flex flex-col items-center gap-1">
+        <div className="p-mt-3 flex flex-col items-center gap-1 tracking-normal">
           <a>Don&apos;t have an account?</a>
           <a className="text-primary">Create account</a>
         </div>
