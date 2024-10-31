@@ -11,7 +11,7 @@ export default function InsideHeader() {
       />
       <div className="flex flex-row items-center justify-center gap-6">
         <Link href="/starter">
-          <div className="rounded-md bg-primaryLight px-5 py-2">
+          <div className="rounded-md bg-primaryLighter px-5 py-2">
             <Image src="assets/images/icon-link.svg" width={20} height={20} />
           </div>
         </Link>
