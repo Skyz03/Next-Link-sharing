@@ -65,6 +65,7 @@ body {
 .p-toast,
 .p-tree,
 .p-treeselect,
+.p-card-content,
 .p-sidebar {
   margin: 0;
   padding: 0;
@@ -86,4 +87,12 @@ body {
 /* Add this to your global CSS or tailwind.config.js */
 .btn-secondary {
   @apply mx-0 w-full rounded-md border border-primary bg-white p-4 text-center font-bold text-primary hover:bg-primary hover:text-pureWhite;
+}
+
+.p-dropdown {
+  padding: 0.5rem;
+}
+
+.p-card-content {
+  padding: 1rem;
 }
