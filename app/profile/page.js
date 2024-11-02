@@ -1,49 +1,87 @@
+// ProfileDetails.js
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import InsideHeader from '../components/headers/InsideHeader'
 import { Button } from 'primereact/button'
 import Image from 'next/image'
+import { supabase } from '../supabaseClient'
 
+/**
+ * ProfileDetails component for displaying and editing user profile information.
+ * Fetches user data from Google OAuth or local storage and allows image uploads and form editing.
+ *
+ * @component
+ */
 export default function ProfileDetails() {
-  // State to manage form inputs
+  // State to manage profile information
   const [profileImage, setProfileImage] = useState(null)
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
 
-  // Retrieve saved data from localStorage on page load
+  /**
+   * Fetches user profile from Supabase if authenticated; otherwise, loads data from localStorage.
+   * Updates state with fetched or stored data.
+   */
   useEffect(() => {
-    setFirstName(localStorage.getItem('firstName') || '')
-    setLastName(localStorage.getItem('lastName') || '')
-    setEmail(localStorage.getItem('email') || '')
-    setProfileImage(localStorage.getItem('profileImage') || null)
+    const fetchUserProfile = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession()
+
+      if (session) {
+        const user = session.user
+        setEmail(user.email || '')
+
+        // Assuming the user's name is stored as 'full_name' in Google OAuth data
+        const [first, last] = (user.user_metadata.full_name || '').split(' ')
+        setFirstName(first || '')
+        setLastName(last || '')
+
+        // Retrieve Google profile image if available
+        setProfileImage(user.user_metadata.avatar_url || null)
+      } else {
+        // If no session is found, load data from localStorage
+        setFirstName(localStorage.getItem('firstName') || '')
+        setLastName(localStorage.getItem('lastName') || '')
+        setEmail(localStorage.getItem('email') || '')
+        setProfileImage(localStorage.getItem('profileImage') || null)
+      }
+    }
+
+    fetchUserProfile()
   }, [])
 
-  // Handle image upload
-  const handleImageUpload = (e) => {
+  /**
+   * Handles image file upload and updates profile image state.
+   *
+   * @param {Event} e - File input change event.
+   */
+  const handleImageUpload = useCallback((e) => {
     const file = e.target.files[0]
     if (file) {
       const imageURL = URL.createObjectURL(file)
       setProfileImage(imageURL)
     }
-  }
+  }, [])
 
-  // Handle form submission and save data to localStorage
-  const handleSave = () => {
-    // Save data to localStorage
+  /**
+   * Saves profile data to localStorage.
+   * @return {void}
+   */
+  const handleSave = useCallback(() => {
     localStorage.setItem('firstName', firstName)
     localStorage.setItem('lastName', lastName)
     localStorage.setItem('email', email)
     localStorage.setItem('profileImage', profileImage)
-
     console.log('Data saved to localStorage:', {
       firstName,
       lastName,
       email,
       profileImage,
     })
-  }
+  }, [firstName, lastName, email, profileImage])
 
   return (
     <>
@@ -116,7 +154,7 @@ export default function ProfileDetails() {
               <input
                 type="text"
                 className="mt-2 w-full rounded-md border border-gray-300 p-4 text-slateBlack"
-                placeholder="Ben"
+                placeholder="First Name"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
               />
@@ -129,7 +167,7 @@ export default function ProfileDetails() {
               <input
                 type="text"
                 className="mt-2 w-full rounded-md border border-gray-300 p-4 text-slateBlack"
-                placeholder="Wright"
+                placeholder="Last Name"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
               />
@@ -140,7 +178,7 @@ export default function ProfileDetails() {
               <input
                 type="email"
                 className="mt-2 w-full rounded-md border border-gray-300 p-4 text-slateBlack"
-                placeholder="ben@example.com"
+                placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
