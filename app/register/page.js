@@ -66,20 +66,24 @@ export default function RegisterPage() {
   return (
     <div className="flex h-full w-full flex-col gap-5 bg-pureWhite p-6">
       <Header />
-      <Register
-        onRegisterClick={handleRegister}
-        onInputChange={handleInputChange}
-        email={email}
-        password={password}
-      />
-      <button onClick={handleGoogleSignIn} className="google-btn">
-        <img
-          src="/assets/images/icon-google.png"
-          alt="Google Logo"
-          className="mr-2 h-5"
+      <div>
+        <Register
+          onRegisterClick={handleRegister}
+          onInputChange={handleInputChange}
+          email={email}
+          password={password}
         />
-        Sign in with Google
-      </button>
+        <div className="px-4">
+          <button onClick={handleGoogleSignIn} className="google-btn">
+            <img
+              src="/assets/images/icon-google.png"
+              alt="Google Logo"
+              className="mr-2 h-5"
+            />
+            Sign in with Google
+          </button>
+        </div>
+      </div>
       <div className="p-mt-3 flex flex-col items-center gap-1">
         <p>Already have an account?</p>
         <Link href="/login" className="text-primary">

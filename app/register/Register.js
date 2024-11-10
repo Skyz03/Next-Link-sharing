@@ -49,6 +49,8 @@ export default function Register({
           iconSrc="/assets/images/icon-password.svg"
         />
 
+        <p>Password must contain at least 8 characters</p>
+
         <RegisterButton
           label="Create new account"
           icon="pi pi-sign-in"

@@ -98,5 +98,5 @@ body {
 }
 
 .google-btn {
-  @apply m-4 flex items-center justify-center rounded border border-black bg-pureWhite p-4 text-black;
+  @apply flex w-full items-center justify-center rounded border border-black bg-pureWhite p-4 text-black;
 }

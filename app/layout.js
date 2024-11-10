@@ -18,12 +18,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className="h-full w-full">
       <body
         className={`${instrumentSans.variable} flex h-full w-full flex-col bg-offWhite`}
       >
-        {/* <Header /> */}
-        <AuthProvider>{children}</AuthProvider>
+        <div className="m-auto xl:w-1/3">
+          <AuthProvider>{children}</AuthProvider>
+        </div>
       </body>
     </html>
   )
