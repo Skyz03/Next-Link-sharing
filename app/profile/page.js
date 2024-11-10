@@ -1,10 +1,10 @@
-// ProfileDetails.js
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
 import InsideHeader from '../components/headers/InsideHeader'
 import { Button } from 'primereact/button'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { supabase } from '../supabaseClient'
 
 /**
@@ -19,6 +19,9 @@ export default function ProfileDetails() {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
+
+  // Router instance for navigation
+  const router = useRouter()
 
   /**
    * Fetches user profile from Supabase if authenticated; otherwise, loads data from localStorage.
@@ -83,11 +86,33 @@ export default function ProfileDetails() {
     })
   }, [firstName, lastName, email, profileImage])
 
+  /**
+   * Handles user sign-out and redirects to the login page.
+   */
+  const handleSignOut = async () => {
+    try {
+      const { error } = await supabase.auth.signOut()
+      if (error) throw error
+      router.push('/') // Redirect to homepage or login page after sign-out
+    } catch (error) {
+      console.error('Error during sign out:', error)
+    }
+  }
+
   return (
     <>
       <InsideHeader />
 
       <div className="p-4 text-slateBlack">
+        {/* Sign-Out Button */}
+        <div className="mb-4 flex justify-end">
+          <Button
+            label="Sign Out"
+            className="btn-danger"
+            onClick={handleSignOut}
+          />
+        </div>
+
         <div className="mt-4 bg-pureWhite p-4 text-slateBlack">
           <h1 className="text-2xl font-bold">Profile Details</h1>
           <p className="mt-2 text-midGray">

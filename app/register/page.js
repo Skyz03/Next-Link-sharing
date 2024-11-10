@@ -30,11 +30,14 @@ export default function RegisterPage() {
   const handleRegister = async (e) => {
     e.preventDefault()
     try {
-      const { error } = await supabase.auth.signUp({ email, password })
+      const { data, error } = await supabase.auth.signUp({
+        email: 'lagaj70275@gmail.com',
+        password: '123213',
+        options: {
+          emailRedirectTo: `${window.location.origin}/welcome`, // Adjust the redirection URL as needed
+        },
+      })
       if (error) throw error
-      alert('Registration successful! Check your email for confirmation.')
-      setEmail('')
-      setPassword('')
     } catch (error) {
       console.error('Error during registration:', error.message)
     }
@@ -66,6 +69,8 @@ export default function RegisterPage() {
       <Register
         onRegisterClick={handleRegister}
         onInputChange={handleInputChange}
+        email={email}
+        password={password}
       />
       <button onClick={handleGoogleSignIn} className="google-btn">
         <img

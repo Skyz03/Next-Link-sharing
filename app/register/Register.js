@@ -8,7 +8,12 @@ import RegisterButton from './RegisterButton'
  * A form component for user registration with email and password fields.
  * Accepts handlers for input change and registration submission.
  */
-export default function Register({ onRegisterClick, onInputChange }) {
+export default function Register({
+  onRegisterClick,
+  onInputChange,
+  email,
+  password,
+}) {
   return (
     <Card
       title="Create account"
@@ -20,6 +25,7 @@ export default function Register({ onRegisterClick, onInputChange }) {
           id="email"
           type="email"
           label="Email address"
+          value={email}
           placeholder="e.g. alex@email.com"
           iconSrc="/assets/images/icon-email.svg"
           onChange={onInputChange}
@@ -29,6 +35,7 @@ export default function Register({ onRegisterClick, onInputChange }) {
           id="password"
           type="password"
           label="Create Password"
+          value={password}
           placeholder="At least 8 characters"
           iconSrc="/assets/images/icon-password.svg"
           onChange={onInputChange}
