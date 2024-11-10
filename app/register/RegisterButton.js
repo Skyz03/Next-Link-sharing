@@ -8,6 +8,7 @@ export default function RegisterButton({ label, icon, onClick }) {
       icon={icon}
       onClick={onClick}
       className="btn-primary"
+      type="submit"
     />
   )
 }

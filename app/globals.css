@@ -96,3 +96,7 @@ body {
 .p-card-content {
   padding: 1rem;
 }
+
+.google-btn {
+  @apply m-4 flex items-center justify-center rounded border border-black bg-pureWhite p-4 text-black;
+}

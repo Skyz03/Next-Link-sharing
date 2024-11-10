@@ -1,9 +1,14 @@
-// pages/register.js
+// Register.js
 import { Card } from 'primereact/card'
 import InputField from './InputField'
 import RegisterButton from './RegisterButton'
 
-export default function Register() {
+/**
+ * @component Register
+ * A form component for user registration with email and password fields.
+ * Accepts handlers for input change and registration submission.
+ */
+export default function Register({ onRegisterClick, onInputChange }) {
   return (
     <Card
       title="Create account"
@@ -17,6 +22,7 @@ export default function Register() {
           label="Email address"
           placeholder="e.g. alex@email.com"
           iconSrc="/assets/images/icon-email.svg"
+          onChange={onInputChange}
         />
 
         <InputField
@@ -25,6 +31,7 @@ export default function Register() {
           label="Create Password"
           placeholder="At least 8 characters"
           iconSrc="/assets/images/icon-password.svg"
+          onChange={onInputChange}
         />
 
         <InputField
@@ -35,12 +42,11 @@ export default function Register() {
           iconSrc="/assets/images/icon-password.svg"
         />
 
-        <RegisterButton label="Create new account" icon="pi pi-sign-in" />
-
-        <div className="p-mt-3 flex flex-col items-center gap-1">
-          <a>Already have an account?</a>
-          <a className="text-primary">Login</a>
-        </div>
+        <RegisterButton
+          label="Create new account"
+          icon="pi pi-sign-in"
+          onClick={onRegisterClick}
+        />
       </div>
     </Card>
   )
