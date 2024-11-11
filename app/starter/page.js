@@ -1,147 +1,190 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import InsideHeader from '../components/headers/InsideHeader'
+// import MobileHeader from '../components/headers/MobileHeader'
+// import DesktopHeader from '../components/headers/DesktopHeader'
 import AddNewLink from './AddNewLink'
 import Image from 'next/image'
 import LinkCard from './LinkCard'
 import SaveButton from '../components/forms/SaveButton'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 
+// Custom hook to detect screen size for responsive design
+const useMediaQuery = (query) => {
+  const [matches, setMatches] = useState(false)
+
+  useEffect(() => {
+    const media = window.matchMedia(query)
+    if (media.matches !== matches) {
+      setMatches(media.matches)
+    }
+    const listener = () => setMatches(media.matches)
+    media.addEventListener('change', listener)
+    return () => media.removeEventListener('change', listener)
+  }, [matches, query])
+
+  return matches
+}
+
 export default function Starter() {
   const [links, setLinks] = useState([{ platform: null, value: '' }])
+  const [isMounted, setIsMounted] = useState(false)
+  const isDesktop = useMediaQuery('(min-width: 1024px)') // Detect if screen width is desktop size
 
-  // Load links from localStorage when component mounts
+  // Load links from localStorage after component mounts (client-side)
   useEffect(() => {
+    setIsMounted(true)
     const storedLinks = JSON.parse(localStorage.getItem('links')) || []
     if (storedLinks.length > 0) {
       setLinks(storedLinks)
     }
   }, [])
 
-  const handleAddLink = () => {
-    setLinks([...links, { platform: null, value: '' }])
-  }
+  const handleAddLink = useCallback(() => {
+    setLinks((prevLinks) => [...prevLinks, { platform: null, value: '' }])
+  }, [])
 
-  // Remove a link from both the state and localStorage
-  const handleRemoveLink = (index) => {
-    const updatedLinks = links.filter((_, i) => i !== index)
-    setLinks(updatedLinks)
-    localStorage.setItem('links', JSON.stringify(updatedLinks)) // Update localStorage
-  }
+  const handleRemoveLink = useCallback((index) => {
+    setLinks((prevLinks) => {
+      const updatedLinks = prevLinks.filter((_, i) => i !== index)
+      localStorage.setItem('links', JSON.stringify(updatedLinks))
+      return updatedLinks
+    })
+  }, [])
 
-  const handleLinkChange = (e, index) => {
-    const updatedLinks = [...links]
-    updatedLinks[index].value = e.target.value
-    setLinks(updatedLinks)
-  }
+  const handleLinkChange = useCallback((e, index) => {
+    const { value } = e.target
+    setLinks((prevLinks) => {
+      const updatedLinks = [...prevLinks]
+      updatedLinks[index].value = value
+      return updatedLinks
+    })
+  }, [])
 
-  const handlePlatformChange = (platform, index) => {
-    const updatedLinks = [...links]
-    updatedLinks[index].platform = platform
-    setLinks(updatedLinks)
-  }
+  const handlePlatformChange = useCallback((platform, index) => {
+    setLinks((prevLinks) => {
+      const updatedLinks = [...prevLinks]
+      updatedLinks[index].platform = platform
+      return updatedLinks
+    })
+  }, [])
 
-  // Save all links to localStorage
-  const handleSave = () => {
+  const handleSave = useCallback(() => {
     localStorage.setItem('links', JSON.stringify(links))
     console.log('Links saved:', links)
-  }
+  }, [links])
 
-  // Handle the drag end event for reordering
-  const handleDragEnd = (result) => {
+  const handleDragEnd = useCallback((result) => {
     const { source, destination } = result
-
-    // If no destination, exit the function
     if (!destination) return
 
-    // Reorder the links array
-    const reorderedLinks = Array.from(links)
-    const [movedLink] = reorderedLinks.splice(source.index, 1)
-    reorderedLinks.splice(destination.index, 0, movedLink)
+    setLinks((prevLinks) => {
+      const reorderedLinks = Array.from(prevLinks)
+      const [movedLink] = reorderedLinks.splice(source.index, 1)
+      reorderedLinks.splice(destination.index, 0, movedLink)
+      localStorage.setItem('links', JSON.stringify(reorderedLinks))
+      return reorderedLinks
+    })
+  }, [])
 
-    // Update the state with the reordered links
-    setLinks(reorderedLinks)
-    localStorage.setItem('links', JSON.stringify(reorderedLinks))
-  }
+  const hasValidLink = useMemo(
+    () => links.some((link) => link.platform && link.value),
+    [links],
+  )
 
-  // Check if there is at least one valid link (platform selected and value entered)
-  const hasValidLink = links.some((link) => link.platform && link.value)
+  if (!isMounted) return null
 
   return (
     <>
-      <InsideHeader />
-      <div className="p-4 text-slateBlack">
-        {/* Add new link button */}
-        <div className="bg-pureWhite py-4 shadow-sm">
-          <AddNewLink onAddLink={handleAddLink} />
+      {/* Render different headers based on screen size */}
+      {/* {isDesktop ? <InsideHeader /> : <MobileHeader />} */}
 
-          {/* Conditionally show intro section if there are no valid links */}
-          {!hasValidLink && (
-            <div className="mx-4 rounded-xl bg-offWhite p-4 text-justify">
-              <Image
-                src="/assets/images/illustration-empty.svg"
-                width={124}
-                height={70}
-                alt="Illustration indicating getting started"
-                className="mx-auto"
-              />
-              <h1 className="mt-4 text-center text-2xl font-bold">
-                Let&apos;s get you started
-              </h1>
-              <p className="font-bodyM mt-2 text-center tracking-wide text-midGray">
-                Use the “Add new link” button to get started. Once you have more
-                than one link, you can reorder and edit them. We&apos;re here to
-                help you share your profiles with everyone!
-              </p>
-            </div>
-          )}
-
-          <DragDropContext onDragEnd={handleDragEnd}>
-            <Droppable droppableId="links">
-              {(provided) => (
-                <div {...provided.droppableProps} ref={provided.innerRef}>
-                  {links.map((link, index) => (
-                    <Draggable
-                      key={index}
-                      draggableId={`link-${index}`}
-                      index={index}
-                    >
-                      {(provided) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          className="mt-4"
-                        >
-                          <LinkCard
-                            selectedPlatform={link.platform}
-                            value={link.value}
-                            onChange={(e) => handleLinkChange(e, index)}
-                            onRemove={() => handleRemoveLink(index)}
-                            onSelectPlatform={(platform) =>
-                              handlePlatformChange(platform, index)
-                            }
-                            linkNumber={index + 1}
-                            dragHandleProps={provided.dragHandleProps} // Pass dragHandleProps to LinkCard
-                          />
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
-        </div>
-        {/* DragDropContext for handling drag and drop */}
-
-        {/* Show SaveButton only if there is at least one valid link */}
-        {hasValidLink && (
-          <div className="mt-4">
-            <SaveButton onClick={handleSave} disabled={links.length === 0} />
+      <div className={`flex bg-lightGray ${isDesktop ? 'min-h-screen' : ''}`}>
+        {/* Left Image Section for Desktop */}
+        {isDesktop && (
+          <div className="my-auto hidden h-full w-full bg-cover bg-center lg:block">
+            <Image
+              src="/assets/images/illustration-phone-mockup.svg"
+              alt="Desktop Side Illustration"
+              objectFit="cover"
+              width={350}
+              height={650}
+            />
           </div>
         )}
+
+        {/* Main Content Section */}
+        <div
+          className={`flex-1 p-4 ${isDesktop ? 'lg:w-2/3 lg:p-8' : 'w-full'}`}
+        >
+          <div className="rounded-xl bg-pureWhite py-4 shadow-sm">
+            <AddNewLink onAddLink={handleAddLink} />
+
+            {!hasValidLink && (
+              <div className="mx-4 rounded-xl bg-offWhite p-4 text-justify">
+                <Image
+                  src="/assets/images/illustration-empty.svg"
+                  width={124}
+                  height={70}
+                  alt="Illustration indicating getting started"
+                  className="mx-auto"
+                />
+                <h1 className="mt-4 text-center text-2xl font-bold">
+                  Let&apos;s get you started
+                </h1>
+                <p className="font-bodyM mt-2 text-center tracking-wide text-midGray">
+                  Use the “Add new link” button to get started. Once you have
+                  more than one link, you can reorder and edit them. We&apos;re
+                  here to help you share your profiles with everyone!
+                </p>
+              </div>
+            )}
+
+            <DragDropContext onDragEnd={handleDragEnd}>
+              <Droppable droppableId="links">
+                {(provided) => (
+                  <div {...provided.droppableProps} ref={provided.innerRef}>
+                    {links.map(({ platform, value }, index) => (
+                      <Draggable
+                        key={index}
+                        draggableId={`link-${index}`}
+                        index={index}
+                      >
+                        {(provided) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            className="mt-4"
+                          >
+                            <LinkCard
+                              selectedPlatform={platform}
+                              value={value}
+                              onChange={(e) => handleLinkChange(e, index)}
+                              onRemove={() => handleRemoveLink(index)}
+                              onSelectPlatform={(platform) =>
+                                handlePlatformChange(platform, index)
+                              }
+                              linkNumber={index + 1}
+                              dragHandleProps={provided.dragHandleProps}
+                            />
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
+          </div>
+
+          {hasValidLink && (
+            <div className="mt-4">
+              <SaveButton onClick={handleSave} disabled={links.length === 0} />
+            </div>
+          )}
+        </div>
       </div>
     </>
   )

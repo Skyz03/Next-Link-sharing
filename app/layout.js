@@ -3,6 +3,7 @@ import 'primereact/resources/themes/md-light-deeppurple/theme.css'
 import 'primereact/resources/primereact.min.css'
 import localFont from 'next/font/local'
 import { AuthProvider } from './context/authContext'
+import DynamicContainer from './components/DynamicContainer'
 
 const instrumentSans = localFont({
   src: './fonts/InstrumentSans-VariableFont2.ttf',
@@ -22,9 +23,9 @@ export default function RootLayout({ children }) {
       <body
         className={`${instrumentSans.variable} flex h-full w-full flex-col bg-offWhite`}
       >
-        <div className="m-auto xl:w-1/3">
+        <DynamicContainer>
           <AuthProvider>{children}</AuthProvider>
-        </div>
+        </DynamicContainer>
       </body>
     </html>
   )
