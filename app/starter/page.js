@@ -98,26 +98,25 @@ export default function Starter() {
   return (
     <>
       {/* Render different headers based on screen size */}
-      {/* {isDesktop ? <InsideHeader /> : <MobileHeader />} */}
+      {isDesktop ? <InsideHeader /> : <InsideHeader />}
 
       <div className={`flex bg-lightGray ${isDesktop ? 'min-h-screen' : ''}`}>
         {/* Left Image Section for Desktop */}
         {isDesktop && (
-          <div className="my-auto hidden h-full w-full bg-cover bg-center lg:block">
+          <div className="hidden h-full w-1/3 bg-cover bg-center xl:m-8 xl:mr-0 xl:block xl:rounded-xl xl:bg-pureWhite xl:p-8">
             <Image
               src="/assets/images/illustration-phone-mockup.svg"
               alt="Desktop Side Illustration"
               objectFit="cover"
               width={350}
               height={650}
+              className="m-auto"
             />
           </div>
         )}
 
         {/* Main Content Section */}
-        <div
-          className={`flex-1 p-4 ${isDesktop ? 'lg:w-2/3 lg:p-8' : 'w-full'}`}
-        >
+        <div className={`flex-1 p-4 ${isDesktop ? 'xl:p-8' : 'w-full'}`}>
           <div className="rounded-xl bg-pureWhite py-4 shadow-sm">
             <AddNewLink onAddLink={handleAddLink} />
 
